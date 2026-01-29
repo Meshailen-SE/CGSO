@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGSO Website Development Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F4C81;
+            --primary-dark: #083A61;
+            --secondary: #EC4899;
+            --accent: #8B5CF6;
+            --coral: #F472B6;
+            --purple: #A855F7;
+            --pink: #DB2777;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --bg: #FFFFFF;
+            --bg-light: #F9FAFB;
+            --bg-gradient: linear-gradient(135deg, #0F4C81 0%, #3B82F6 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 80px 20px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(236, 72, 153, 0.15);
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: slideDown 0.8s ease-out 0.2s both;
+        }
+
+        .hero .organization {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #F472B6;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+            animation: slideDown 0.8s ease-out 0.4s both;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            animation: slideDown 0.8s ease-out 0.6s both;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-meta-item strong {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .hero-meta-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Badges */
+        .badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #EC4899;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #EC4899;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 76, 129, 0.03) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(15, 76, 129, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:nth-child(3n+1) {
+            border-top-color: #3B82F6;
+        }
+
+        .feature-card:nth-child(3n+2) {
+            border-top-color: #EC4899;
+        }
+
+        .feature-card:nth-child(3n+3) {
+            border-top-color: #A855F7;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(15, 76, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(15, 76, 129, 0.3);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #EC4899, #A855F7);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #EC4899, #F472B6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, transparent 70%);
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .pricing-section h2 {
+            color: white;
+        }
+
+        .pricing-section h2::after {
+            background: #EC4899;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--text);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3B82F6, #EC4899, #A855F7);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: #EC4899;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #FDF2F8 0%, #FFFFFF 100%);
+            border: 3px solid #EC4899;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #EC4899;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #0F4C81;
+            margin: 20px 0;
+            line-height: 1;
+        }
+
+        .pricing-card .price-note {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(15, 76, 129, 0.1);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #EC4899;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        /* Breakdown Table */
+        .breakdown {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 50px;
+            overflow-x: auto;
+        }
+
+        .breakdown h3 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        th:last-child {
+            text-align: right;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #E5E7EB;
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #F9FAFB;
+        }
+
+        td {
+            padding: 18px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .table-section {
+            background: #F3F4F6;
+            font-weight: 600;
+        }
+        
+        .table-section td {
+            color: var(--primary-dark);
+        }
+
+        .table-subtotal {
+            background: #FEF3C7;
+            font-weight: 700;
+            
+        }
+
+        .table-total {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .table-total td {
+            color: white;
+        }
+
+        /* Payment Terms */
+        .payment-terms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .payment-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 30px;
+            border-radius: 16px;
+            border-left: 5px solid #3B82F6;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .payment-card:nth-child(2) {
+            border-left-color: #EC4899;
+        }
+
+        .payment-card:nth-child(3) {
+            border-left-color: #F472B6;
+        }
+
+        .payment-card:nth-child(4) {
+            border-left-color: #A855F7;
+        }
+
+        .payment-card h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .payment-card .amount {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0F4C81;
+            margin: 10px 0;
+        }
+
+        .payment-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: linear-gradient(135deg, #EFF6FF 0%, #FCE7F3 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 20px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.15);
+            transform: translateX(5px);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .benefit-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section * {
+            color: white;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .cta-section h2::after {
+            display: none;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-steps {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .cta-step {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            max-width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-step:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .cta-step-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: #DB2777;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 0 auto 20px;
+        }
+
+        .cta-step h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-step p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 1.05rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .organization {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            h3 {
+                font-size: 1.6rem;
+            }
+
+            .pricing-card .price {
+                font-size: 2.5rem;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .badges {
+                justify-content: center;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .breakdown {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Website Development Proposal</h1>
+            <div class="subtitle">Custom Website Solution for</div>
+            <div class="organization">Consumer Goods and Services Ombud</div>
+            
+            <div class="badges">
+                <span class="badge">✨ Custom Built</span>
+                <span class="badge">🚀 No WordPress</span>
+                <span class="badge">🔒 Enterprise Security</span>
+                <span class="badge">💎 NPO Pricing</span>
+            </div>
+
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <strong>Proposal Date</strong>
+                    <span>29 January 2026</span>
+                </div>
+                <div class="hero-meta-item">
+                    <strong>Project Duration</strong>
+                    <span>10-12 Weeks</span>
+                </div>
+                <div class="hero-meta-item">
+                    <strong>Validity Period</strong>
+                    <span>60 Days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <section>
+        <div class="container">
+            <h2>Executive Summary</h2>
+            <p>This proposal outlines a comprehensive website development solution for the Consumer Goods and Services Ombud (CGSO). We will deliver a custom-built, modern website that moves away from WordPress to a bespoke solution tailored specifically to CGSO's needs as South Africa's consumer goods and services industry ombud scheme.</p>
+            <p>The solution includes a fully custom website built from scratch, comprehensive monthly maintenance support, enhanced security features, and optimal performance to serve your stakeholders effectively. <strong>Our pricing has been specially adjusted to support your important work as an NPO.</strong></p>
+        </div>
+    </section>
+
+    <!-- Understanding Requirements -->
+    <section>
+        <div class="container">
+            <h2>Understanding Your Requirements</h2>
+            <p>Based on our review of your current website at www.cgso.org.za and your organization's mission, we understand that CGSO requires:</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Custom Built Solution</h4>
+                    <p>A bespoke website not based on WordPress, giving you full control and flexibility</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h4>Dispute Resolution Platform</h4>
+                    <p>Professional platform for consumer complaints and alternative dispute resolution</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h4>Registration System</h4>
+                    <p>Online registration system for industry participants and members</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h4>Information Hub</h4>
+                    <p>Comprehensive resource center for consumer rights and education</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h4>Opportunities Management</h4>
+                    <p>Platform to publish tenders, vacancies, and business opportunities</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h4>Events & Training</h4>
+                    <p>Calendar system for workshops, webinars, and stakeholder events</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Secure Platform</h4>
+                    <p>Enterprise-grade security for handling sensitive consumer information</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h4>Ongoing Support</h4>
+                    <p>Comprehensive monthly maintenance and technical support package</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proposed Solution -->
+    <section>
+        <div class="container">
+            <h2>Proposed Solution</h2>
+            
+            <h3>1. Custom Website Development</h3>
+            <p>We will build a completely custom website using modern web technologies, ensuring full control, flexibility, and optimal performance without the limitations and security vulnerabilities often associated with WordPress.</p>
+
+            <h4 style="font-size: 1.5rem; margin-top: 40px; color: var(--primary);">Technology Stack</h4>
+            <div class="tech-stack">
+                <div class="tech-item">🎯 React.js / Next.js</div>
+                <div class="tech-item">⚙️ Node.js / Python</div>
+                <div class="tech-item">🗄️ PostgreSQL / MongoDB</div>
+                <div class="tech-item">☁️ Cloud Hosting</div>
+                <div class="tech-item">🔒 SSL & POPIA Compliance</div>
+            </div>
+
+            <h4 style="font-size: 1.5rem; margin-top: 50px; color: var(--primary);">Key Features</h4>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Custom CMS</h4>
+                    <p>Bespoke admin panel tailored for easy content management</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h4>Complaint Portal</h4>
+                    <p>Secure online form for consumers to lodge complaints</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h4>Member System</h4>
+                    <p>Complete registration and management for participants</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h4>Document Library</h4>
+                    <p>Repository for reports, policies, and resources</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📰</div>
+                    <h4>News & Updates</h4>
+                    <p>Dynamic blog for consumer alerts and announcements</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h4>Opportunities Section</h4>
+                    <p>Dedicated page for tenders, vacancies, and business opportunities</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h4>Events Calendar</h4>
+                    <p>Interactive calendar for workshops, training sessions, and meetings</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Responsive Design</h4>
+                    <p>Mobile-friendly design optimized for all devices</p>
+                </div>
+            </div>
+
+            <h3>2. Monthly Maintenance & Support Package</h3>
+            <p>Comprehensive ongoing support to ensure your website remains secure, up-to-date, and performing optimally.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h4>Security Updates</h4>
+                    <p>Regular patches and vulnerability monitoring</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Performance Monitoring</h4>
+                    <p>24/7 uptime tracking and optimization</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <h4>Content Updates</h4>
+                    <p>Up to 5 hours of content changes monthly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h4>Backup Management</h4>
+                    <p>Daily automated backups with 30-day retention</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h4>Technical Support</h4>
+                    <p>Email and phone support during business hours</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🐛</div>
+                    <h4>Bug Fixes</h4>
+                    <p>Priority resolution of technical issues</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Timeline -->
+    <section>
+        <div class="container">
+            <h2>Project Timeline</h2>
+            <p>The project will be completed in phases over approximately 10-12 weeks:</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">1-2</div>
+                    <h4>Discovery & Planning</h4>
+                    <p>Requirements gathering, wireframes, design concepts, and project kickoff</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">3-5</div>
+                    <h4>Design Phase</h4>
+                    <p>UI/UX design, client approval, and design refinements</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">6-9</div>
+                    <h4>Development</h4>
+                    <p>Frontend and backend development, CMS integration, database setup</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">10-11</div>
+                    <h4>Testing & QA</h4>
+                    <p>Comprehensive testing, security audit, performance optimization</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">12</div>
+                    <h4>Launch</h4>
+                    <p>Content migration, final testing, website launch, and team training</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="background-color: #083A61;">
+        <div class="container" >
+            <h2 >Investment & Pricing</h2>
+            <p style="color: white; font-size: 1.2rem;">Special NPO pricing to support your important consumer protection work</p>
+
+            <div class="pricing-cards">
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Best Value</div>
+                    <h3>One-Off Project Cost</h3>
+                    <div class="price">R 220,000</div>
+                    <div class="price-note">Excl. VAT | R 253,000 Incl. VAT</div>
+                    <ul class="pricing-features">
+                        <li>Complete custom website development</li>
+                        <li>All features and functionality</li>
+                        <li>Custom CMS development</li>
+                        <li>Complaint portal system</li>
+                        <li>Member registration system</li>
+                        <li>Content migration & setup</li>
+                        <li>First year hosting included</li>
+                        <li>Security implementation</li>
+                        <li>Testing & optimization</li>
+                        <li>Training & documentation</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Monthly Maintenance</h3>
+                    <div class="price">R 8,500</div>
+                    <div class="price-note">Per month excl. VAT | R 9,775 Incl. VAT</div>
+                    <ul class="pricing-features">
+                        <li>Security updates & monitoring</li>
+                        <li>5 hours content updates</li>
+                        <li>Daily automated backups</li>
+                        <li>Technical support</li>
+                        <li>Performance monitoring</li>
+                        <li>Bug fixes & optimization</li>
+                        <li>Analytics reporting</li>
+                        <li>Hosting management</li>
+                        <li>SSL certificate renewal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h3>Detailed Cost Breakdown</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th style="text-align: center;">Details</th>
+                            <th>Amount (ZAR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-section">
+                            <td colspan="3"><strong>Development Components</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Discovery & Planning Phase</td>
+                            <td style="text-align: center;">Requirements & Strategy</td>
+                            <td>R 12,000</td>
+                        </tr>
+                        <tr>
+                            <td>UI/UX Design & Wireframing</td>
+                            <td style="text-align: center;">Complete Design System</td>
+                            <td>R 22,000</td>
+                        </tr>
+                        <tr>
+                            <td>Frontend Development</td>
+                            <td style="text-align: center;">React/Next.js</td>
+                            <td>R 58,000</td>
+                        </tr>
+                        <tr>
+                            <td>Backend Development & Database</td>
+                            <td style="text-align: center;">API & Database</td>
+                            <td>R 55,000</td>
+                        </tr>
+                        <tr>
+                            <td>Custom CMS Development</td>
+                            <td style="text-align: center;">Admin Panel</td>
+                            <td>R 32,000</td>
+                        </tr>
+                        <tr>
+                            <td>Complaint Portal System</td>
+                            <td style="text-align: center;">Secure Forms</td>
+                            <td>R 25,000</td>
+                        </tr>
+                        <tr>
+                            <td>Member Registration System</td>
+                            <td style="text-align: center;">User Management</td>
+                            <td>R 22,000</td>
+                        </tr>
+                        <tr>
+                            <td>Content Migration & Setup</td>
+                            <td style="text-align: center;">Data Transfer</td>
+                            <td>R 12,000</td>
+                        </tr>
+                        <tr>
+                            <td>Security & SSL Implementation</td>
+                            <td style="text-align: center;">POPIA Compliance</td>
+                            <td>R 10,000</td>
+                        </tr>
+                        <tr>
+                            <td>Testing, QA & Optimization</td>
+                            <td style="text-align: center;">Quality Assurance</td>
+                            <td>R 15,000</td>
+                        </tr>
+                        <tr>
+                            <td>Training & Documentation</td>
+                            <td style="text-align: center;">User Guides</td>
+                            <td>R 7,000</td>
+                        </tr>
+                        <!-- <tr class="table-total" style="background-color: #EC4899;">
+                            <td ><strong >Development Subtotal</strong></td>
+                            <td></td>
+                            <td><strong>R 210,000</strong></td>
+                        </tr> -->
+                        <!-- <tr>
+                            <td>First Year Hosting & Infrastructure</td>
+                            <td style="text-align: center;">12 Months</td>
+                            <td>R 10,000</td>
+                        </tr> -->
+                        <tr class="table-total">
+                            <td colspan="2"><strong>TOTAL PROJECT COST (Excl. VAT)</strong></td>
+                            <td><strong>R 220,000</strong></td>
+                        </tr>
+                        <tr class="table-total" style="background: #4472C4; color: white;">
+                            <td colspan="2"><strong>VAT (15%)</strong></td>
+                            <td><strong>R 33,000</strong></td>
+                        </tr>
+                        <tr class="table-total" style="background: #EC4899;; color: white; font-size: 1.1rem;">
+                            <td colspan="2"><strong>TOTAL INCLUDING VAT</strong></td>
+                            <td><strong>R 253,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h3 style="color: white; text-align: center; margin-bottom: 30px;">Payment Terms</h3>
+                <div class="payment-terms">
+                    <div class="payment-card">
+                        <h4>Deposit</h4>
+                        <div class="amount">R 126,500</div>
+                        <p>50% upon project commencement (Incl. VAT)</p>
+                    </div>
+                    <div class="payment-card">
+                        <h4>Milestone</h4>
+                        <div class="amount">R 63,250</div>
+                        <p>25% at design approval & development midpoint (Incl. VAT)</p>
+                    </div>
+                    <div class="payment-card">
+                        <h4>Final Payment</h4>
+                        <div class="amount">R 63,250</div>
+                        <p>25% upon completion and launch (Incl. VAT)</p>
+                    </div>
+                    <div class="payment-card">
+                        <h4>Monthly Maintenance</h4>
+                        <div class="amount">R 9,775</div>
+                        <p>Invoiced monthly in advance (Incl. VAT)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Custom -->
+    <section class="why-choose">
+        <div class="container">
+            <h2>Why Choose a Custom Solution?</h2>
+            <p>Moving away from WordPress to a custom-built solution offers significant advantages for your organization:</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔒</div>
+                    <div class="benefit-content">
+                        <h4>Superior Security</h4>
+                        <p>No WordPress vulnerabilities, plugin conflicts, or common attack vectors</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-content">
+                        <h4>Better Performance</h4>
+                        <p>Optimized code without bloated plugins for lightning-fast load times</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-content">
+                        <h4>Full Ownership</h4>
+                        <p>Complete control over your codebase with no third-party dependencies</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-content">
+                        <h4>Scalability</h4>
+                        <p>Easily adapt and expand as your organization's needs grow</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎨</div>
+                    <div class="benefit-content">
+                        <h4>Unique Design</h4>
+                        <p>Tailored specifically to your brand identity and requirements</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛠️</div>
+                    <div class="benefit-content">
+                        <h4>Professional Support</h4>
+                        <p>Dedicated development team familiar with every aspect of your system</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" style="background: var(--bg-gradient);">
+        <div class="container" >
+            <h2>Let's Get Started</h2>
+            <p>Ready to transform your online presence with a modern, secure, custom website?</p>
+
+            <div class="cta-steps">
+                <div class="cta-step">
+                    <div class="cta-step-number">1</div>
+                    <h4>Review Proposal</h4>
+                    <p>Discuss details and requirements</p>
+                </div>
+                <div class="cta-step">
+                    <div class="cta-step-number">2</div>
+                    <h4>Sign Agreement</h4>
+                    <p>Finalize project scope and terms</p>
+                </div>
+                <div class="cta-step">
+                    <div class="cta-step-number">3</div>
+                    <h4>Begin Development</h4>
+                    <p>Kickoff meeting and project start</p>
+                </div>
+                <div class="cta-step">
+                    <div class="cta-step-number">4</div>
+                    <h4>Launch Website</h4>
+                    <p>Go live with your new platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.2rem; margin-bottom: 25px;">We are excited about the opportunity to partner with CGSO and create a modern, secure, and effective website platform that serves your mission of protecting South African consumers.</p>
+            <p>Should you have any questions or require clarification on any aspect of this proposal, please do not hesitate to contact us.</p>
+            
+            <div class="contact-info">
+                <p><strong>Prepared By:</strong></p>
+                <p><strong>Preshalen Chetty</strong> | Managing Director</p>
+                <p><strong>Trivenity</strong></p>
+                <p>📧 Preshalen.Chetty@Trivenity.Africa | 📞 +27 60 529 2237</p>
+                <p style="margin-top: 20px; opacity: 0.7;">Proposal valid for 30 days from 30 January 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .timeline-item, .benefit-item').forEach((el) => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
